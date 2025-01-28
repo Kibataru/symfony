@@ -1,9 +1,13 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}User Profile{% endblock %}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}User Profile{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+</head>
+<body>
 {% block body %}
-
     <div id="user-profile">
         {% set total = 0 %}
         <h1 id="user-name">User name: {{ user.username }}</h1>
@@ -33,8 +37,7 @@
         </div>
 
         <h1 id="total-balance" class="total-balance">Total balance: {{ total }}</h1>
-
     </div>
-
-
 {% endblock %}
+</body>
+</html>
