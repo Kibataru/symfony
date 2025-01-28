@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block body %}
+
+    <div id="user-profile">
+        {% set total = 0 %}
+        <h1 id="user-name">User name: {{ user.username }}</h1>
+        <h1 id="portfolios-title">Your portfolios:</h1>
+        <h3 id="portfolio-count">Total numbers of portfolios: {{ user.portfolios|length }}</h3>
+
+        <div id="portfolios-list">
+            {% for portfolio in user.portfolios %}
+                {% set walletTotal = 0 %}
+
+                <div class="portfolio-entry" id="portfolio-{{ portfolio.id }}">
+                    <span class="portfolio-info">Portfolio {{ portfolio.id }} has {{ portfolio.balance }} money and has stocks:</span>
+                    <br>
+                    {% for depositary in portfolio.depositaries %}
+                        <div class="depositary-entry">
+                            <h4 class="stock-name">Stock name:</h4>
+                            <p class="stock-details">{{ depositary.stock.security }}, quantity: {{ depositary.quantity }}</p>
+                        </div>
+                        <br>
+                    {% endfor %}
+                    {% set walletTotal = walletTotal + portfolio.balance %}
+                    {% set total = walletTotal + total %}
+                    <h3 class="portfolio-balance">Balance of portfolio {{ portfolio.id }}: {{ walletTotal }}</h3>
+                    <br>
+                </div>
+            {% endfor %}
+        </div>
+
+        <h1 id="total-balance" class="total-balance">Total balance: {{ total }}</h1>
+
+    </div>
+
+
+{% endblock %}
